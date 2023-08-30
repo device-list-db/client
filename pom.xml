@@ -16,7 +16,20 @@
 		<javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
 		<maven.compiler.source>19</maven.compiler.source>
 		<maven.compiler.target>19</maven.compiler.target>
+		<local.repo.folder>${pom.basedir}/libraries/</local.repo.folder>
 	</properties>
+	<repositories>
+		<repository>
+			<id>local-repo</id>
+			<url>file://${local.repo.folder}</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
