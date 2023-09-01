@@ -35,7 +35,7 @@ public class MainScreenController implements Initializable {
         try {
             tableView.getItems().setAll(setValues());
         } catch (IOException e) {
-            new Alert(AlertType.ERROR, "Server error 500.", ButtonType.OK);
+            ClientMain.showError("Server Error 500");
         }
     }
 
@@ -85,10 +85,10 @@ public class MainScreenController implements Initializable {
                     ClientMain.getNetworkManager().send("DELETE-DEVICE " + device.getOwner() + " " + device.getSerialNumber() + " " + device.getMacAddress() + " " + device.getDeviceName());
                     ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve());
                 } catch (IOException e) {
-                    new Alert(AlertType.ERROR, "Server error 500.", ButtonType.OK).showAndWait();
+                    ClientMain.showError("Server error 500");
                 }
         } else {
-            new Alert(AlertType.WARNING, "Credentials not authorized for this operation.", ButtonType.OK).showAndWait();
+            ClientMain.showError("Credentials not authorized for this operation.");
         }
     }
 
@@ -103,7 +103,7 @@ public class MainScreenController implements Initializable {
             AddDeviceController.deviceSerialDefault = d.getSerialNumber();
             ClientMain.setRoot("AddDevice");
         } else {
-            new Alert(AlertType.WARNING, "Credentials not authorized for this operation.", ButtonType.OK).showAndWait();
+            ClientMain.showError("Credentials not authorized for this operaion.");
         }
     }
 }

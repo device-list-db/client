@@ -48,7 +48,7 @@ public class ClientMain extends Application {
             stage.sizeToScene();
             stage.centerOnScreen();
         } catch (IOException e) {
-            new Alert(AlertType.ERROR, "FXML Security failure", ButtonType.OK).showAndWait();
+            showError("FXML Security failure");
             ClientMain.logger.logError(e);
         }
     }
@@ -75,7 +75,6 @@ public class ClientMain extends Application {
             setConnector(new NetworkManager(new Socket(dotenv.get("SERVADR"), Integer.parseInt(dotenv.get("SERVPORT")))));
             launch(args);
         } catch (IOException e) {
-            new Alert(AlertType.ERROR, "Server connection issue", ButtonType.OK).showAndWait();
             ClientMain.logger.logError(e);
         }
     }
