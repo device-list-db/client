@@ -75,7 +75,6 @@ public class ClientMain extends Application {
             setConnector(new NetworkManager(new Socket(dotenv.get("SERVADR"), Integer.parseInt(dotenv.get("SERVPORT")))));
             launch(args);
         } catch (IOException e) {
-            new Alert(AlertType.ERROR, "Server connection issue", ButtonType.OK).showAndWait();
             ClientMain.logger.logError(e);
         }
     }
