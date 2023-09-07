@@ -50,6 +50,13 @@ jobs:
         # queries: security-extended,security-and-quality
 
 
+    - name: Set up JDK 19
+      uses: actions/setup-java@v1
+      with:
+        distribution: "Liberica"
+        java-version: 19
+        java-package: jdk+fx
+
     # Autobuild attempts to build any compiled languages (C/C++, C#, Go, Java, or Swift).
     # If this step fails, then you should remove it and run the build manually (see below)
     - name: Autobuild
