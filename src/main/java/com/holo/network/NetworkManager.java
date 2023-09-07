@@ -1,6 +1,6 @@
 package com.holo.network;
 
-import com.holo.Talker;
+import com.holo.utils.Talker;
 import com.holo.gui.ClientMain;
 
 import java.net.Socket;
