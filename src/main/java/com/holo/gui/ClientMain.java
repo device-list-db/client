@@ -2,6 +2,7 @@ package com.holo.gui;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Optional;
 
 import com.holo.login.Account;
 import com.holo.network.NetworkManager;
@@ -16,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 public class ClientMain extends Application {
@@ -53,15 +55,14 @@ public class ClientMain extends Application {
         }
     }
 
-    // TODO: Figure out how to do popups
-    /*public static Optional<Popup> getPopup(String fxml) {
+    public static Optional<Popup> getPopup(String fxml) {
         Popup popup = new Popup();
         try {
             if (!VerifyFXML.validFXMLFile(fxml)) throw new IOException("Unable to read the file");
             popup.getContent().add(loadFXML(fxml));
         } catch(IOException e) {}
         return Optional.ofNullable(popup);
-    }*/
+    }
     
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoad = new FXMLLoader(ClientMain.class.getResource(fxml + ".fxml"));
