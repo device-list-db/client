@@ -19,6 +19,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 public class ClientMain extends Application {
 
@@ -55,13 +56,17 @@ public class ClientMain extends Application {
         }
     }
 
-    public static Optional<Popup> getPopup(String fxml) {
+    public static Optional<Popup> showPopup(String fxml) {
         Popup popup = new Popup();
         try {
             if (!VerifyFXML.validFXMLFile(fxml)) throw new IOException("Unable to read the file");
             popup.getContent().add(loadFXML(fxml));
         } catch(IOException e) {}
         return Optional.ofNullable(popup);
+    }
+
+    public static Window getWindow() {
+        return scene.getWindow();
     }
     
     private static Parent loadFXML(String fxml) throws IOException {
