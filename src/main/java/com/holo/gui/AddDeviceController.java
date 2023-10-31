@@ -13,6 +13,7 @@ public class AddDeviceController {
     public static String deviceSerialDefault;
     public static String deviceMacDefault;
     public static String deviceNameDefault;
+    public static String deviceOwner;
     @FXML private TextField deviceSerial;
     @FXML private TextField deviceMac;
     @FXML private TextField deviceName;
@@ -67,6 +68,7 @@ public class AddDeviceController {
                    errorMessage.setText("Device enrollment failed");
                 }
             } else {
+                owner = deviceOwner;
                 ClientMain.getNetworkManager().send("UPDATE-DEVICE " + owner + " " + dSer + " " + dMac + " " + dNam);
                 if (ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()).equals("DEVICE-UPDATE-YES")) {
                     ClientMain.setRoot("MainScreen");
