@@ -8,11 +8,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+import javafx.stage.Popup;
 
 public class AddDeviceController {
     public static String deviceSerialDefault;
     public static String deviceMacDefault;
     public static String deviceNameDefault;
+    public static Popup thisPopup;
     @FXML private TextField deviceSerial;
     @FXML private TextField deviceMac;
     @FXML private TextField deviceName;
@@ -75,6 +77,7 @@ public class AddDeviceController {
                    errorMessage.setText("Device enrollment failed");
                 }
             }
+            AddDeviceController.thisPopup.hide();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -84,13 +87,13 @@ public class AddDeviceController {
     @FXML
     private void onCancel(Event event) {
         event.consume();
-        ClientMain.setRoot("MainScreen");
+        AddDeviceController.thisPopup.hide();
     }
 
     // Go back to the main screen instead of closing the application out
     @FXML
     private void exitApplication(ActionEvent event) {
         event.consume();
-        ClientMain.setRoot("MainScreen");
+        AddDeviceController.thisPopup.hide();
     }
 }

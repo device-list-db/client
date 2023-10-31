@@ -106,7 +106,8 @@ public class MainScreenController implements Initializable {
             AddDeviceController.deviceMacDefault = d.getMacAddress();
             AddDeviceController.deviceNameDefault = d.getDeviceName();
             AddDeviceController.deviceSerialDefault = d.getSerialNumber();
-            ClientMain.setRoot("AddDevice");
+            AddDeviceController.thisPopup = ClientMain.showPopup("AddDevice").get();
+            AddDeviceController.thisPopup.show(ClientMain.getWindow());
         } else {
             ClientMain.showError("Credentials not authorized for this operaion.");
         }
