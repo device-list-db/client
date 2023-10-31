@@ -76,7 +76,11 @@ public class MainScreenController implements Initializable {
     @FXML
     private void handleAllDevices(Event event) {
         event.consume();
-        // TODO: Handle all devices being shown
+        try {
+            tableView.getItems().setAll(setValues());
+        } catch (IOException e) {
+            ClientMain.showError("Server Error 500");
+        }
     }
 
     @FXML
