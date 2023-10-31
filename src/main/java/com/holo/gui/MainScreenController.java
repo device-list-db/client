@@ -34,13 +34,13 @@ public class MainScreenController implements Initializable {
         deviceName.setCellValueFactory(new PropertyValueFactory<Device, String>("deviceName"));
         deviceOwner.setCellValueFactory(new PropertyValueFactory<Device, String>("owner"));
 
+        allDevices.setSelected(ClientMain.account.isAdmin());
+
         try {
             tableView.getItems().setAll(setValues());
         } catch (IOException e) {
             ClientMain.showError("Server Error 500");
         }
-
-        allDevices.setSelected(ClientMain.account.isAdmin());
     }
 
     // Create a list that will be used to populate the table for devices
