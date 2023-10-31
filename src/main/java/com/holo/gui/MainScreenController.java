@@ -16,6 +16,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 
 public class MainScreenController implements Initializable {
@@ -24,6 +25,7 @@ public class MainScreenController implements Initializable {
     @FXML private TableColumn<Device, String> macAddress;
     @FXML private TableColumn<Device, String> deviceName;
     @FXML private TableColumn<Device, String> deviceOwner;
+    @FXML private CheckBox allDevices;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -31,6 +33,8 @@ public class MainScreenController implements Initializable {
         macAddress.setCellValueFactory(new PropertyValueFactory<Device, String>("macAddress"));
         deviceName.setCellValueFactory(new PropertyValueFactory<Device, String>("deviceName"));
         deviceOwner.setCellValueFactory(new PropertyValueFactory<Device, String>("owner"));
+
+        allDevices.setSelected(ClientMain.account.isAdmin());
 
         try {
             tableView.getItems().setAll(setValues());
@@ -41,7 +45,10 @@ public class MainScreenController implements Initializable {
 
     // Create a list that will be used to populate the table for devices
     private List<Device> setValues() throws IOException {
-        ClientMain.getNetworkManager().send("GET-DEVICES " + ClientMain.account.getUsername());
+        if (!allDevices.isSelected())
+            ClientMain.getNetworkManager().send("GET-DEVICES " + ClientMain.account.getUsername());
+        else
+            ClientMain.getNetworkManager().send("GET-DEVICES-ALL");
         ArrayList<Device> al = new ArrayList<>();
         int numTimes = Integer.parseInt(ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()));
         for (int i = 0; i < numTimes; i++) {
@@ -64,6 +71,16 @@ public class MainScreenController implements Initializable {
         // Removes the DEVICE-FINISH messgae from the queue
         ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve());
         return al;
+    }
+
+    @FXML
+    private void handleAllDevices(Event event) {
+        event.consume();
+        try {
+            tableView.getItems().setAll(setValues());
+        } catch (IOException e) {
+            ClientMain.showError("Server Error 500");
+        }
     }
 
     @FXML
@@ -106,6 +123,7 @@ public class MainScreenController implements Initializable {
             AddDeviceController.deviceMacDefault = d.getMacAddress();
             AddDeviceController.deviceNameDefault = d.getDeviceName();
             AddDeviceController.deviceSerialDefault = d.getSerialNumber();
+            AddDeviceController.deviceOwner = device.getOwner();
             AddDeviceController.thisPopup = ClientMain.showPopup("AddDevice").get();
             AddDeviceController.thisPopup.show(ClientMain.getWindow());
         } else {

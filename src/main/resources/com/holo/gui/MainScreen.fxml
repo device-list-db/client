@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -10,9 +11,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.holo.gui.MainScreenController">
+<VBox prefHeight="415.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.holo.gui.MainScreenController">
    <children>
-      <TitledPane animated="false" collapsible="false" prefHeight="26.0" prefWidth="600.0" text="Device DB Screen">
+      <TitledPane animated="false" collapsible="false" prefHeight="25.0" prefWidth="593.0" text="Device DB Screen">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
         </content>
@@ -21,7 +22,7 @@
         <tabs>
           <Tab text="Devices">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="218.0" prefWidth="599.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="358.0" prefWidth="600.0">
                      <children>
                         <ButtonBar layoutX="56.0" layoutY="303.0" prefHeight="27.0" prefWidth="510.0">
                           <buttons>
@@ -40,6 +41,7 @@
                               <TableColumn fx:id="deviceOwner" prefWidth="110.39996337890625" text="Device Owner" />
                           </columns>
                         </TableView>
+                        <CheckBox fx:id="allDevices" layoutX="271.0" layoutY="332.0" mnemonicParsing="false" onAction="#handleAllDevices" prefHeight="17.0" prefWidth="103.0" text="See all devices" />
                      </children>
                   </AnchorPane>
             </content>
