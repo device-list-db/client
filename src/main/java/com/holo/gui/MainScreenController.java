@@ -119,6 +119,7 @@ public class MainScreenController implements Initializable {
             AddDeviceController.deviceMacDefault = d.getMacAddress();
             AddDeviceController.deviceNameDefault = d.getDeviceName();
             AddDeviceController.deviceSerialDefault = d.getSerialNumber();
+            AddDeviceController.deviceOwner = device.getOwner();
             AddDeviceController.thisPopup = ClientMain.showPopup("AddDevice").get();
             AddDeviceController.thisPopup.show(ClientMain.getWindow());
         } else {
