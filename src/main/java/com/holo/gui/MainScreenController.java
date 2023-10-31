@@ -84,6 +84,11 @@ public class MainScreenController implements Initializable {
                 try {
                     ClientMain.getNetworkManager().send("DELETE-DEVICE " + device.getOwner() + " " + device.getSerialNumber() + " " + device.getMacAddress() + " " + device.getDeviceName());
                     ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve());
+                    try {
+                        tableView.getItems().setAll(setValues());
+                    } catch (IOException e) {
+                        ClientMain.showError("Server Error 500");
+                    }
                 } catch (IOException e) {
                     ClientMain.showError("Server error 500");
                 }
