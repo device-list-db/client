@@ -16,6 +16,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 
 public class MainScreenController implements Initializable {
@@ -24,6 +25,7 @@ public class MainScreenController implements Initializable {
     @FXML private TableColumn<Device, String> macAddress;
     @FXML private TableColumn<Device, String> deviceName;
     @FXML private TableColumn<Device, String> deviceOwner;
+    @FXML private CheckBox allDevicesCheck;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -37,6 +39,8 @@ public class MainScreenController implements Initializable {
         } catch (IOException e) {
             ClientMain.showError("Server Error 500");
         }
+
+        allDevicesCheck.setSelected(ClientMain.account.isAdmin());
     }
 
     // Create a list that will be used to populate the table for devices
@@ -64,6 +68,12 @@ public class MainScreenController implements Initializable {
         // Removes the DEVICE-FINISH messgae from the queue
         ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve());
         return al;
+    }
+
+    @FXML
+    private void handleAllDevices(Event event) {
+        event.consume();
+        // TODO: Handle all devices being shown
     }
 
     @FXML
