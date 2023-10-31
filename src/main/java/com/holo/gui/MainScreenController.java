@@ -25,7 +25,7 @@ public class MainScreenController implements Initializable {
     @FXML private TableColumn<Device, String> macAddress;
     @FXML private TableColumn<Device, String> deviceName;
     @FXML private TableColumn<Device, String> deviceOwner;
-    @FXML private CheckBox allDevicesCheck;
+    @FXML private CheckBox allDevices;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -40,12 +40,15 @@ public class MainScreenController implements Initializable {
             ClientMain.showError("Server Error 500");
         }
 
-        allDevicesCheck.setSelected(ClientMain.account.isAdmin());
+        allDevices.setSelected(ClientMain.account.isAdmin());
     }
 
     // Create a list that will be used to populate the table for devices
     private List<Device> setValues() throws IOException {
-        ClientMain.getNetworkManager().send("GET-DEVICES " + ClientMain.account.getUsername());
+        if (!allDevices.isSelected())
+            ClientMain.getNetworkManager().send("GET-DEVICES " + ClientMain.account.getUsername());
+        else
+            ClientMain.getNetworkManager().send("GET-DEVICES-ALL");
         ArrayList<Device> al = new ArrayList<>();
         int numTimes = Integer.parseInt(ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()));
         for (int i = 0; i < numTimes; i++) {
