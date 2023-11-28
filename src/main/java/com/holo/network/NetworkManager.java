@@ -42,6 +42,8 @@ public class NetworkManager {
     public String parseServerMessage(String message) {
         String[] tmp = message.split(" ");
         switch(tmp[0]) {
+            case "KILL": // Special: Server kills the client
+                System.exit(-1);
             case "ADMIN-TOTAL": // Add to this when only the first argument is the required response
             case "LOGIN-PASS":
             case "ADMIN-PASS":
@@ -68,8 +70,6 @@ public class NetworkManager {
             case "LOG-YES":
             case "DEVICE-UPDATE-YES":
                 return tmp[0];
-            case "KILL": // Special: Server kills the client
-                System.exit(-1);
         }
         return "NULL";
     }

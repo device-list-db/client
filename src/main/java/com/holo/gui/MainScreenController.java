@@ -118,16 +118,13 @@ public class MainScreenController implements Initializable {
     private void handleEditDevice(Event event) {
         event.consume();
         Device device = tableView.getSelectionModel().getSelectedItem();
-        if (ClientMain.account.isAdmin() || device.getOwner().equals(ClientMain.account.getUsername())) {
-            Device d = tableView.getSelectionModel().getSelectedItem();
-            AddDeviceController.deviceMacDefault = d.getMacAddress();
-            AddDeviceController.deviceNameDefault = d.getDeviceName();
-            AddDeviceController.deviceSerialDefault = d.getSerialNumber();
-            AddDeviceController.deviceOwner = device.getOwner();
-            AddDeviceController.thisPopup = ClientMain.showPopup("AddDevice").get();
-            AddDeviceController.thisPopup.show(ClientMain.getWindow());
-        } else {
+        if (!ClientMain.account.isAdmin() && !device.getOwner().equals(ClientMain.account.getUsername())) {
             ClientMain.showError("Credentials not authorized for this operaion.");
+            return;
         }
+        Device d = tableView.getSelectionModel().getSelectedItem();
+        AddDeviceController.setVariables(d.getSerialNumber(), d.getMacAddress(), d.getDeviceName(), device.getOwner());
+        AddDeviceController.thisPopup = ClientMain.showPopup("AddDevice").get();
+        AddDeviceController.thisPopup.show(ClientMain.getWindow());
     }
 }
