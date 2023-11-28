@@ -11,10 +11,10 @@ import javafx.scene.paint.Color;
 import javafx.stage.Popup;
 
 public class AddDeviceController {
-    public static String deviceSerialDefault;
-    public static String deviceMacDefault;
-    public static String deviceNameDefault;
-    public static String deviceOwner;
+    private static String deviceSerialDefault;
+    private static String deviceMacDefault;
+    private static String deviceNameDefault;
+    private static String deviceOwner;
     public static Popup thisPopup;
     @FXML private TextField deviceSerial;
     @FXML private TextField deviceMac;
@@ -24,6 +24,13 @@ public class AddDeviceController {
 
     public AddDeviceController() {
         editMode = false;
+    }
+
+    public static void setVariables(String serial, String mac, String name, String owner) {
+        deviceSerialDefault = serial;
+        deviceMacDefault = mac;
+        deviceNameDefault = name;
+        deviceOwner = owner;
     }
 
     @FXML
@@ -59,25 +66,29 @@ public class AddDeviceController {
             }
         } else
             dNam = deviceName.getText().trim();
+        
+        owner += " ";
+        dSer += " ";
+        dMac += " ";
+        dNam += " ";
 
         try {
+            String command = "";
+            String networkComplete = "";
             if (!editMode) {
-                ClientMain.getNetworkManager().send("REGISTER-DEVICE " + owner + " " + dSer + " " + dMac + " " + dNam);
-                if (ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()).equals("DEVICE-YES")) {
-                    ClientMain.setRoot("MainScreen");
-                } else {
-                    errorMessage.setTextFill(Color.FIREBRICK);
-                   errorMessage.setText("Device enrollment failed");
-                }
+                command = "REGISTER-DEVICE ";
+                networkComplete = "DEVICE-YES";
             } else {
                 owner = deviceOwner;
-                ClientMain.getNetworkManager().send("UPDATE-DEVICE " + owner + " " + dSer + " " + dMac + " " + dNam);
-                if (ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()).equals("DEVICE-UPDATE-YES")) {
+                command = "UPDATE-DEVICE ";
+                networkComplete = "DEVICE-UPDATE-YES";
+            }
+            ClientMain.getNetworkManager().send(command + owner + dSer + dMac + dNam);
+            if (ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()).equals(networkComplete)) {
                     ClientMain.setRoot("MainScreen");
-                } else {
-                    errorMessage.setTextFill(Color.FIREBRICK);
-                   errorMessage.setText("Device enrollment failed");
-                }
+            } else {
+                errorMessage.setTextFill(Color.FIREBRICK);
+                errorMessage.setText("Device enrollment failed");
             }
             AddDeviceController.thisPopup.hide();
         } catch (IOException e) {
