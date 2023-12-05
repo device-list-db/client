@@ -19,6 +19,11 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 
+/**
+ * Model code for the MainScreen
+ * @since 0.1.0
+ * @version 0.2.0
+ */
 public class MainScreenController implements Initializable {
     @FXML private TableView<Device> tableView;
     @FXML private TableColumn<Device, String> deviceSerial;

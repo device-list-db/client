@@ -16,6 +16,11 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
+/**
+ * Model code for the login screen
+ * @since 0.1.0
+ * @version 0.2.0
+ */
 public class LoginController {
     @FXML private Text actionTarget;
     @FXML private TextField userName;
