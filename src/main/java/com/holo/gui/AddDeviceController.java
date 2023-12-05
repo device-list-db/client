@@ -10,11 +10,19 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Popup;
 
+/**
+ * Model code for the AddDevice screen
+ * @since 0.1.0
+ * @version 0.2.0
+ */
 public class AddDeviceController {
     private static String deviceSerialDefault;
     private static String deviceMacDefault;
     private static String deviceNameDefault;
     private static String deviceOwner;
+    /**
+     * A Popup controller object
+     */
     public static Popup thisPopup;
     @FXML private TextField deviceSerial;
     @FXML private TextField deviceMac;
@@ -22,10 +30,20 @@ public class AddDeviceController {
     @FXML private Label errorMessage;
     private boolean editMode;
 
+    /**
+     * Initialize an empty model
+     */
     public AddDeviceController() {
         editMode = false;
     }
 
+    /**
+     * Set default variables
+     * @param serial of the device
+     * @param mac of the device
+     * @param name of the device
+     * @param owner Username of the owner of the device
+     */
     public static void setVariables(String serial, String mac, String name, String owner) {
         deviceSerialDefault = serial;
         deviceMacDefault = mac;

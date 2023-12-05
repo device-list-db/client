@@ -8,7 +8,8 @@ import java.net.Socket;
 
 /**
  * Allows the communicatuion between client and server
- *
+ * @since 0.1.0
+ * @version 0.1.0
  */
 public class Talker {
     private DataOutputStream writeStream;

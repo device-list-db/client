@@ -8,6 +8,8 @@ import java.io.IOException;
 
 /**
  * Class to bridge low level network communication with high level methods
+ * @since 0.1.0
+ * @version 0.2.0
  */
 public class NetworkManager {
     private Talker talker;
@@ -39,6 +41,11 @@ public class NetworkManager {
         talker.send(message);
     }
 
+    /**
+     * Parse the message sent by the server, and handle it
+     * @param message sent from the server
+     * @return String message representing what action to take
+     */
     public String parseServerMessage(String message) {
         String[] tmp = message.split(" ");
         switch(tmp[0]) {

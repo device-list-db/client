@@ -21,13 +21,24 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+/**
+ * Application start point after {@link com.holo.SuperMain SuperMain}
+ * @since 0.1.0
+ * @version 0.2.0
+ */
 public class ClientMain extends Application {
 
     private static Scene scene;
     static Stage stage;
     private static NetworkManager nm;
     private static Dotenv dotenv;
+    /**
+     * Global {@link com.holo.login.Account Account} object
+     */
     public static Account account = new Account();
+    /**
+     * Global {@link com.holo.utils.Logger Logger} object
+     */
     public static final Logger logger = new Logger();
 
     @Override
@@ -40,10 +51,18 @@ public class ClientMain extends Application {
         stage.show();
     }
 
+    /**
+     * The head error display function, if an error needs to be shown to the user.
+     * @param error The message of the error
+     */
     public static void showError(String error) {
         new Alert(AlertType.ERROR, error, ButtonType.OK).showAndWait();
     }
 
+    /**
+     * Changes the root of the stage to display a page
+     * @param fxml File name
+     */
     public static void setRoot(String fxml) {
         try {
             if (!VerifyFXML.validFXMLFile(fxml)) throw new IOException("Unable to read the file");
@@ -56,6 +75,11 @@ public class ClientMain extends Application {
         }
     }
 
+    /**
+     * Create a popup object to display
+     * @param fxml File name of the popup
+     * @return An Optional object possibly containing a Popup object
+     */
     public static Optional<Popup> showPopup(String fxml) {
         Popup popup = new Popup();
         try {
@@ -65,6 +89,10 @@ public class ClientMain extends Application {
         return Optional.ofNullable(popup);
     }
 
+    /**
+     * Get the scene window
+     * @return The primary Window object
+     */
     public static Window getWindow() {
         return scene.getWindow();
     }
@@ -89,6 +117,10 @@ public class ClientMain extends Application {
         nm = netMan;
     }
 
+    /**
+     * Obtain the global network manager
+     * @return NetworkManager object
+     */
     public static NetworkManager getNetworkManager() {
         return nm;
     }
