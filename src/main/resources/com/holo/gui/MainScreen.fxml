@@ -93,6 +93,28 @@
                   </AnchorPane>
                </content>
             </Tab>
+            <Tab disable="true" text="Admin">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView prefHeight="300.0" prefWidth="600.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="Person ID" />
+                              <TableColumn prefWidth="141.0" text="Name" />
+                              <TableColumn prefWidth="121.0" text="Username" />
+                           </columns>
+                        </TableView>
+                        <ButtonBar layoutX="103.0" layoutY="303.0" prefHeight="27.0" prefWidth="388.0">
+                           <buttons>
+                              <Button disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" text="Remove person" />
+                              <Button defaultButton="true" minWidth="58.0" mnemonicParsing="false" prefHeight="13.0" prefWidth="78.0" text="Add person" />
+                              <Button disable="true" mnemonicParsing="false" text="Create Account" />
+                           </buttons>
+                        </ButtonBar>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
         </tabs>
       </TabPane>
    </children>
