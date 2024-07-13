@@ -5,10 +5,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * Logger class for issues/debug messages
+ * @since 0.1.0
+ * @version 0.1.0
+ */
 public class Logger {
-    public Logger() {
-    }
+    public Logger() {}
 
+    /**
+     * Log an error to the error log file
+     * @param e Exception to log
+     */
     public void logError(Exception e) {
         try {
             FileWriter New_File = new FileWriter("Error-log.txt", true);

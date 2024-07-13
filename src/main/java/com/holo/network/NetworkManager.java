@@ -1,6 +1,6 @@
 package com.holo.network;
 
-import com.holo.Talker;
+import com.holo.utils.Talker;
 import com.holo.gui.ClientMain;
 
 import java.net.Socket;
@@ -8,6 +8,8 @@ import java.io.IOException;
 
 /**
  * Class to bridge low level network communication with high level methods
+ * @since 0.1.0
+ * @version 0.2.0
  */
 public class NetworkManager {
     private Talker talker;
@@ -39,9 +41,16 @@ public class NetworkManager {
         talker.send(message);
     }
 
+    /**
+     * Parse the message sent by the server, and handle it
+     * @param message sent from the server
+     * @return String message representing what action to take
+     */
     public String parseServerMessage(String message) {
         String[] tmp = message.split(" ");
         switch(tmp[0]) {
+            case "KILL": // Special: Server kills the client
+                System.exit(-1);
             case "ADMIN-TOTAL": // Add to this when only the first argument is the required response
             case "LOGIN-PASS":
             case "ADMIN-PASS":
@@ -68,8 +77,6 @@ public class NetworkManager {
             case "LOG-YES":
             case "DEVICE-UPDATE-YES":
                 return tmp[0];
-            case "KILL": // Special: Server kills the client
-                System.exit(-1);
         }
         return "NULL";
     }

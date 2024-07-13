@@ -8,19 +8,47 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+import javafx.stage.Popup;
 
+/**
+ * Model code for the AddDevice screen
+ * @since 0.1.0
+ * @version 0.2.0
+ */
 public class AddDeviceController {
-    public static String deviceSerialDefault;
-    public static String deviceMacDefault;
-    public static String deviceNameDefault;
+    private static String deviceSerialDefault;
+    private static String deviceMacDefault;
+    private static String deviceNameDefault;
+    private static String deviceOwner;
+    /**
+     * A Popup controller object
+     */
+    public static Popup thisPopup;
     @FXML private TextField deviceSerial;
     @FXML private TextField deviceMac;
     @FXML private TextField deviceName;
     @FXML private Label errorMessage;
     private boolean editMode;
 
+    /**
+     * Initialize an empty model
+     */
     public AddDeviceController() {
         editMode = false;
+    }
+
+    /**
+     * Set default variables
+     * @param serial of the device
+     * @param mac of the device
+     * @param name of the device
+     * @param owner Username of the owner of the device
+     */
+    public static void setVariables(String serial, String mac, String name, String owner) {
+        deviceSerialDefault = serial;
+        deviceMacDefault = mac;
+        deviceNameDefault = name;
+        deviceOwner = owner;
     }
 
     @FXML
@@ -56,25 +84,31 @@ public class AddDeviceController {
             }
         } else
             dNam = deviceName.getText().trim();
+        
+        owner += " ";
+        dSer += " ";
+        dMac += " ";
+        dNam += " ";
 
         try {
+            String command = "";
+            String networkComplete = "";
             if (!editMode) {
-                ClientMain.getNetworkManager().send("REGISTER-DEVICE " + owner + " " + dSer + " " + dMac + " " + dNam);
-                if (ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()).equals("DEVICE-YES")) {
-                    ClientMain.setRoot("MainScreen");
-                } else {
-                    errorMessage.setTextFill(Color.FIREBRICK);
-                   errorMessage.setText("Device enrollment failed");
-                }
+                command = "REGISTER-DEVICE ";
+                networkComplete = "DEVICE-YES";
             } else {
-                ClientMain.getNetworkManager().send("UPDATE-DEVICE " + owner + " " + dSer + " " + dMac + " " + dNam);
-                if (ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()).equals("DEVICE-UPDATE-YES")) {
-                    ClientMain.setRoot("MainScreen");
-                } else {
-                    errorMessage.setTextFill(Color.FIREBRICK);
-                   errorMessage.setText("Device enrollment failed");
-                }
+                owner = deviceOwner;
+                command = "UPDATE-DEVICE ";
+                networkComplete = "DEVICE-UPDATE-YES";
             }
+            ClientMain.getNetworkManager().send(command + owner + dSer + dMac + dNam);
+            if (ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()).equals(networkComplete)) {
+                    ClientMain.setRoot("MainScreen");
+            } else {
+                errorMessage.setTextFill(Color.FIREBRICK);
+                errorMessage.setText("Device enrollment failed");
+            }
+            AddDeviceController.thisPopup.hide();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -84,13 +118,13 @@ public class AddDeviceController {
     @FXML
     private void onCancel(Event event) {
         event.consume();
-        ClientMain.setRoot("MainScreen");
+        AddDeviceController.thisPopup.hide();
     }
 
     // Go back to the main screen instead of closing the application out
     @FXML
     private void exitApplication(ActionEvent event) {
         event.consume();
-        ClientMain.setRoot("MainScreen");
+        AddDeviceController.thisPopup.hide();
     }
 }

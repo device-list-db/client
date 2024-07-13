@@ -16,14 +16,21 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 
+/**
+ * Model code for the MainScreen
+ * @since 0.1.0
+ * @version 0.2.0
+ */
 public class MainScreenController implements Initializable {
     @FXML private TableView<Device> tableView;
     @FXML private TableColumn<Device, String> deviceSerial;
     @FXML private TableColumn<Device, String> macAddress;
     @FXML private TableColumn<Device, String> deviceName;
     @FXML private TableColumn<Device, String> deviceOwner;
+    @FXML private CheckBox allDevices;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -32,16 +39,21 @@ public class MainScreenController implements Initializable {
         deviceName.setCellValueFactory(new PropertyValueFactory<Device, String>("deviceName"));
         deviceOwner.setCellValueFactory(new PropertyValueFactory<Device, String>("owner"));
 
+        allDevices.setSelected(ClientMain.account.isAdmin());
+
         try {
             tableView.getItems().setAll(setValues());
         } catch (IOException e) {
-            new Alert(AlertType.ERROR, "Server error 500.", ButtonType.OK);
+            ClientMain.showError("Server Error 500");
         }
     }
 
     // Create a list that will be used to populate the table for devices
     private List<Device> setValues() throws IOException {
-        ClientMain.getNetworkManager().send("GET-DEVICES " + ClientMain.account.getUsername());
+        if (!allDevices.isSelected())
+            ClientMain.getNetworkManager().send("GET-DEVICES " + ClientMain.account.getUsername());
+        else
+            ClientMain.getNetworkManager().send("GET-DEVICES-ALL");
         ArrayList<Device> al = new ArrayList<>();
         int numTimes = Integer.parseInt(ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()));
         for (int i = 0; i < numTimes; i++) {
@@ -67,6 +79,16 @@ public class MainScreenController implements Initializable {
     }
 
     @FXML
+    private void handleAllDevices(Event event) {
+        event.consume();
+        try {
+            tableView.getItems().setAll(setValues());
+        } catch (IOException e) {
+            ClientMain.showError("Server Error 500");
+        }
+    }
+
+    @FXML
     private void handleAddDevice(Event event) {
         event.consume();
         ClientMain.setRoot("AddDevice");
@@ -84,11 +106,16 @@ public class MainScreenController implements Initializable {
                 try {
                     ClientMain.getNetworkManager().send("DELETE-DEVICE " + device.getOwner() + " " + device.getSerialNumber() + " " + device.getMacAddress() + " " + device.getDeviceName());
                     ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve());
+                    try {
+                        tableView.getItems().setAll(setValues());
+                    } catch (IOException e) {
+                        ClientMain.showError("Server Error 500");
+                    }
                 } catch (IOException e) {
-                    new Alert(AlertType.ERROR, "Server error 500.", ButtonType.OK).showAndWait();
+                    ClientMain.showError("Server error 500");
                 }
         } else {
-            new Alert(AlertType.WARNING, "Credentials not authorized for this operation.", ButtonType.OK).showAndWait();
+            ClientMain.showError("Credentials not authorized for this operation.");
         }
     }
 
@@ -96,14 +123,13 @@ public class MainScreenController implements Initializable {
     private void handleEditDevice(Event event) {
         event.consume();
         Device device = tableView.getSelectionModel().getSelectedItem();
-        if (ClientMain.account.isAdmin() || device.getOwner().equals(ClientMain.account.getUsername())) {
-            Device d = tableView.getSelectionModel().getSelectedItem();
-            AddDeviceController.deviceMacDefault = d.getMacAddress();
-            AddDeviceController.deviceNameDefault = d.getDeviceName();
-            AddDeviceController.deviceSerialDefault = d.getSerialNumber();
-            ClientMain.setRoot("AddDevice");
-        } else {
-            new Alert(AlertType.WARNING, "Credentials not authorized for this operation.", ButtonType.OK).showAndWait();
+        if (!ClientMain.account.isAdmin() && !device.getOwner().equals(ClientMain.account.getUsername())) {
+            ClientMain.showError("Credentials not authorized for this operaion.");
+            return;
         }
+        Device d = tableView.getSelectionModel().getSelectedItem();
+        AddDeviceController.setVariables(d.getSerialNumber(), d.getMacAddress(), d.getDeviceName(), device.getOwner());
+        AddDeviceController.thisPopup = ClientMain.showPopup("AddDevice").get();
+        AddDeviceController.thisPopup.show(ClientMain.getWindow());
     }
 }

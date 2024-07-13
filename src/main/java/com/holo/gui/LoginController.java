@@ -1,6 +1,7 @@
 package com.holo.gui;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import com.holo.utils.Encryption;
 
@@ -15,10 +16,16 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
+/**
+ * Model code for the login screen
+ * @since 0.1.0
+ * @version 0.2.0
+ */
 public class LoginController {
     @FXML private Text actionTarget;
     @FXML private TextField userName;
     @FXML private PasswordField password;
+    private final String[] ReservedWords = {"NULL"};
 
     @FXML
     private void handleLogin(Event event) {
@@ -70,8 +77,8 @@ public class LoginController {
             setError("You must enter a username.");
             return;
         }
-        if (user.equals("NULL")) {
-            setError("Username is a reserved word.");
+        if (Arrays.asList(ReservedWords).contains(user)) {
+            setError("Username is/contains a reserved word.");
             return;
         }
         if (pass.length() < 1) {
