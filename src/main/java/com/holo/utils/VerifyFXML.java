@@ -16,8 +16,8 @@ public class VerifyFXML {
     public static void setupWhitelist() {
         validFiles.add("AddDevice");
         validFiles.add("LoginPage");
+        validFiles.add("DevicePage");
         validFiles.add("MainScreen");
-        validFiles.add("MainScreen2");
     }
 
     /**

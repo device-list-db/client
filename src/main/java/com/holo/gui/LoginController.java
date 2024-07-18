@@ -51,7 +51,7 @@ public class LoginController {
                 ClientMain.account.login(user, ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()).equals("YES"));
                 ClientMain.getNetworkManager().send("LOG LOGIN " + user); // Tell the server to log the login
                 ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()); // Remove the server response from the message queue
-                ClientMain.setRoot("MainScreen2", "HOLO SYSTEM: Main Screen");
+                ClientMain.setRoot("MainScreen", "HOLO SYSTEM: Main Screen");
             } catch (IOException e) {
                 ClientMain.logger.logError(e);
                 setError("Unauthorized access");
