@@ -93,7 +93,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab disable="true" text="Admin">
+            <Tab id="Admin" fx:id="admin" disable="true" text="Admin">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>

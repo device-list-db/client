@@ -17,6 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 
 /**
@@ -31,9 +32,11 @@ public class MainScreenController implements Initializable {
     @FXML private TableColumn<Device, String> deviceName;
     @FXML private TableColumn<Device, String> deviceOwner;
     @FXML private CheckBox allDevices;
+    @FXML private Tab admin;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        if (ClientMain.account.isAdmin()) admin.setDisable(false);
         deviceSerial.setCellValueFactory(new PropertyValueFactory<Device, String>("serialNumber"));
         macAddress.setCellValueFactory(new PropertyValueFactory<Device, String>("macAddress"));
         deviceName.setCellValueFactory(new PropertyValueFactory<Device, String>("deviceName"));
