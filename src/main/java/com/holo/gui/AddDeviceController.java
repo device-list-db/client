@@ -55,12 +55,8 @@ public class AddDeviceController {
 
     @FXML
     private void initialize() {
-        try {
         if (deviceSerialDefault.isEmpty() || deviceMacDefault.isEmpty() || deviceNameDefault.isEmpty())
             return;
-        } catch (NullPointerException e) {
-            return;
-        }
         deviceSerial.setText(deviceSerialDefault);
         deviceSerial.setEditable(false);
         deviceMac.setText(deviceMacDefault);
