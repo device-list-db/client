@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.holo.utils.Device;
+import com.holo.utils.Titles;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -94,7 +95,7 @@ public class MainScreenController implements Initializable {
     @FXML
     private void handleAddDevice(Event event) {
         event.consume();
-        ClientMain.setRoot("AddDevice");
+        ClientMain.setRoot("AddDevice", Titles.ADDDEVICE.getTitle());
     }
 
     @FXML
