@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 public class MainScreen2Controller {
 
     @FXML
-    private void devicesClicked(Event event) {
+    private void deviceClicked(Event event) {
         event.consume();
         ClientMain.setRoot("MainScreen");
     }
