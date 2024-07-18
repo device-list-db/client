@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.holo.utils.Device;
 import com.holo.utils.Person;
 
 import javafx.fxml.FXML;
@@ -20,7 +19,7 @@ public class AdminController {
 
     @FXML
     private void initialize() {
-        id.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        id.setCellValueFactory(new PropertyValueFactory<>("Id"));
         name.setCellValueFactory(new PropertyValueFactory<>("Name"));
         username.setCellValueFactory(new PropertyValueFactory<>("Username"));
 
@@ -41,9 +40,9 @@ public class AdminController {
             String username = ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve());
             String name = ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve());
             if (username.length() > 0)
-                tmp.registerPerson(Integer.parseInt(id), name, username);
+                tmp.registerPerson(id, name, username);
             else
-                tmp.registerPerson(Integer.parseInt(id), name);
+                tmp.registerPerson(id, name);
             al.add(tmp);
         }
         return al;
