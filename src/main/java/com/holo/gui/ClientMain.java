@@ -52,6 +52,14 @@ public class ClientMain extends Application {
     }
 
     /**
+     * Set the title for the window
+     * @param title The new title
+     */
+    public static void setTitle(String title) {
+        stage.setTitle(title);
+    }
+
+    /**
      * The head error display function, if an error needs to be shown to the user.
      * @param error The message of the error
      */
@@ -62,8 +70,26 @@ public class ClientMain extends Application {
     /**
      * Changes the root of the stage to display a page
      * @param fxml File name
+     * @deprecated Does not update the title of the screen
      */
     public static void setRoot(String fxml) {
+        try {
+            if (!VerifyFXML.validFXMLFile(fxml)) throw new IOException("Unable to read the file");
+            scene.setRoot(loadFXML(fxml));
+            stage.sizeToScene();
+            stage.centerOnScreen();
+        } catch (IOException e) {
+            showError("FXML Security failure");
+            ClientMain.logger.logError(e);
+        }
+    }
+
+    /**
+     * Changes the root of the stage to display a page
+     * @param fxml File name
+     */
+    public static void setRoot(String fxml, String title) {
+        setTitle(title);
         try {
             if (!VerifyFXML.validFXMLFile(fxml)) throw new IOException("Unable to read the file");
             scene.setRoot(loadFXML(fxml));
