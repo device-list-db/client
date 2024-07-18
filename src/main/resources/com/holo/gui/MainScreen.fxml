@@ -11,7 +11,7 @@
             <Button fx:id="devices" layoutX="163.0" layoutY="14.0" mnemonicParsing="false" onAction="#deviceClicked" prefHeight="80.0" prefWidth="249.0" text="Devices" />
             <Button fx:id="books" disable="true" layoutX="163.0" layoutY="107.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="249.0" text="Books" />
             <Button fx:id="debts" layoutX="163.0" layoutY="199.0" mnemonicParsing="false" onAction="#debtClicked" prefHeight="80.0" prefWidth="249.0" text="Debts" />
-            <Button fx:id="admin" disable="true" layoutX="163.0" layoutY="294.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="249.0" text="Admin" />
+            <Button fx:id="adminButton" disable="true" layoutX="163.0" layoutY="294.0" mnemonicParsing="false" onAction="#adminClicked" prefHeight="80.0" prefWidth="249.0" text="Admin" />
          </children></AnchorPane>
   </content>
 </TitledPane>

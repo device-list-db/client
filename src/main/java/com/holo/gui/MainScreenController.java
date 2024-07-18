@@ -1,12 +1,10 @@
 package com.holo.gui;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import com.holo.utils.Titles;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 
 /**
  * @since 0.2.0
@@ -14,9 +12,11 @@ import javafx.fxml.FXML;
  */
 public class MainScreenController {
 
+    @FXML Button adminButton;
+
     @FXML
-    private void initialize(URL location, ResourceBundle resources) {
-        ClientMain.setTitle("HOLO SYSTEM: Main Screen");
+    private void initialize() {
+        if (ClientMain.account.isAdmin()) adminButton.setDisable(false);
     }
 
     @FXML
@@ -29,5 +29,11 @@ public class MainScreenController {
     private void debtClicked(Event event) {
         event.consume();
         ClientMain.setRoot("DebtPage", Titles.DEBT.getTitle());
+    }
+
+    @FXML
+    private void adminClicked(Event event) {
+        event.consume();
+        ClientMain.setRoot("AdminPage", Titles.ADMIN.getTitle());
     }
 }

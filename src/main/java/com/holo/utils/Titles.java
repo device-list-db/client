@@ -3,7 +3,8 @@ package com.holo.utils;
 public enum Titles {
     MAINSCREEN("Devices"),
     ADDDEVICE("Add Device"), 
-    DEBT("Debts");
+    DEBT("Debts"),
+    ADMIN("Admin");
 
     private String title;
 

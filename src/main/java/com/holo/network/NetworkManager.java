@@ -60,6 +60,10 @@ public class NetworkManager {
             case "DEVICE-NAME":
             case "DEVICE-TOTAL":
             case "ADMIN-RESPONSE":
+            case "USER-TOTAL":
+            case "USER-ID":
+            case "USER-USERNAME":
+            case "USER-NAME":
                 return tmp[1];
             case "ERROR":
                 ClientMain.showError(tmp[1]); // Show the server given error, then return ERROR
