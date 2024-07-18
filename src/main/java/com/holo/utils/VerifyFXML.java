@@ -17,6 +17,7 @@ public class VerifyFXML {
         validFiles.add("AddDevice");
         validFiles.add("LoginPage");
         validFiles.add("MainScreen");
+        validFiles.add("MainScreen2");
     }
 
     /**
@@ -25,7 +26,7 @@ public class VerifyFXML {
      * @return if the name of the file is allowed to run
      */
     public static boolean validFXMLFile(String fxml) {
-        if (validFiles.size() != 3) return false;
+        if (validFiles.size() != 4) return false;
         return validFiles.contains(fxml);
     }
 }
