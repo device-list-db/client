@@ -133,4 +133,10 @@ public class DeviceController implements Initializable {
         AddDeviceController.thisPopup = ClientMain.showPopup("AddDevice").get();
         AddDeviceController.thisPopup.show(ClientMain.getWindow());
     }
+
+    @FXML
+    private void backPressed(Event event) {
+        event.consume();
+        ClientMain.setRoot("MainScreen", "HOLO SYSTEM: Main Screen");
+    }
 }

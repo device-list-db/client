@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.holo.utils.Person;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -46,5 +47,11 @@ public class AdminController {
             al.add(tmp);
         }
         return al;
+    }
+
+    @FXML
+    private void backPressed(Event event) {
+        event.consume();
+        ClientMain.setRoot("MainScreen", "HOLO SYSTEM: Main Screen");
     }
 }
