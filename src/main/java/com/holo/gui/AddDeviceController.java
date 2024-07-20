@@ -37,6 +37,10 @@ public class AddDeviceController {
      */
     public AddDeviceController() {
         editMode = false;
+        deviceSerialDefault = "";
+        deviceMacDefault = "";
+        deviceNameDefault = "";
+        deviceOwner = "";
     }
 
     /**
