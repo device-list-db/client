@@ -72,6 +72,7 @@ public class AdminController {
                 return;
             }
             // TODO: Create a special "login" screen where the only option is register for this option
+
         }
     }
 
@@ -83,7 +84,6 @@ public class AdminController {
 
     @FXML
     private void addPerson(Event event) {
-        System.out.println("TEST");
         event.consume();
         TextInputDialog tx = new TextInputDialog();
         tx.setHeaderText("Please enter the name of the person: ");
