@@ -67,6 +67,10 @@ public class ClientMain extends Application {
         new Alert(AlertType.ERROR, error, ButtonType.OK).showAndWait();
     }
 
+    public static void showInfo(String info) {
+        new Alert(AlertType.INFORMATION, info, ButtonType.OK).showAndWait();
+    }
+
     /**
      * Changes the root of the stage to display a page
      * @param fxml File name
