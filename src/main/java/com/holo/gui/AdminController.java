@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.holo.utils.Encryption;
 import com.holo.utils.Person;
 
 import javafx.event.Event;
@@ -71,8 +72,26 @@ public class AdminController {
                 ClientMain.showError("An account already exists for this person");
                 return;
             }
-            // TODO: Create a special "login" screen where the only option is register for this option
-
+            TextInputDialog tx = new TextInputDialog();
+            tx.setHeaderText("Please enter the username: ");
+            tx.setTitle("Username");
+            String user = tx.showAndWait().get().strip();
+            TextInputDialog tx1 = new TextInputDialog();
+            tx1.setHeaderText("Please enter the password: ");
+            tx1.setTitle("Password");
+            String pass = tx1.showAndWait().get().strip();
+            String encPass = Encryption.encryptPassword(pass);
+            pass = "";
+            try {
+                ClientMain.getNetworkManager().send("REGISTER-ACCOUNT " + user + " " + encPass + " " + p.get().getName());
+                if (ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()).equals("REGISTRATION-PASS")) {
+                    ClientMain.showInfo("Registration successful");
+                    p.get().registerPerson(p.get().getId(), p.get().getName(), user);
+                } else
+                    ClientMain.showError("Registration failed");
+            } catch (IOException e) {
+                ClientMain.logger.logError(e);
+            }
         }
     }
 
