@@ -1,99 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="415.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.holo.gui.MainScreenController">
-   <children>
-      <TitledPane animated="false" collapsible="false" prefHeight="25.0" prefWidth="593.0" text="Device DB Screen">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-        </content>
-      </TitledPane>
-      <TabPane prefHeight="374.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Devices">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="358.0" prefWidth="600.0">
-                     <children>
-                        <ButtonBar layoutX="56.0" layoutY="303.0" prefHeight="27.0" prefWidth="510.0">
-                          <buttons>
-                              <Button mnemonicParsing="false" onAction="#handleDeletingDevice" text="Delete Device" />
-                              <Button disable="true" mnemonicParsing="false" text="Mark Found" />
-                            <Button defaultButton="true" minWidth="58.0" mnemonicParsing="false" onAction="#handleAddDevice" prefHeight="13.0" prefWidth="78.0" text="Add Device" />
-                              <Button disable="true" mnemonicParsing="false" text="Mark Lost" />
-                              <Button minWidth="58.0" mnemonicParsing="false" onAction="#handleEditDevice" prefHeight="13.0" prefWidth="78.0" text="Edit Device" />
-                          </buttons>
-                        </ButtonBar>
-                        <TableView fx:id="tableView" prefHeight="300.0" prefWidth="600.0">
-                          <columns>
-                              <TableColumn fx:id="deviceSerial" prefWidth="84.0" text="Device Serial" />
-                            <TableColumn fx:id="macAddress" prefWidth="93.5999755859375" text="MAC Address" />
-                            <TableColumn fx:id="deviceName" prefWidth="91.99993896484375" text="Device Name" />
-                              <TableColumn fx:id="deviceOwner" prefWidth="110.39996337890625" text="Device Owner" />
-                          </columns>
-                        </TableView>
-                        <CheckBox fx:id="allDevices" layoutX="271.0" layoutY="332.0" mnemonicParsing="false" onAction="#handleAllDevices" prefHeight="17.0" prefWidth="103.0" text="See all devices" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab disable="true" text="Debts">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView prefHeight="300.0" prefWidth="600.0">
-                           <columns>
-                              <TableColumn prefWidth="75.0" text="Debtor" />
-                              <TableColumn prefWidth="75.0" text="Debtee" />
-                              <TableColumn prefWidth="98.4000244140625" text="Amount owed" />
-                              <TableColumn prefWidth="98.4000244140625" text="Amount paid" />
-                              <TableColumn prefWidth="98.4000244140625" text="Due Date" />
-                           </columns>
-                        </TableView>
-                        <ButtonBar layoutX="134.0" layoutY="303.0" prefHeight="27.0" prefWidth="307.0">
-                           <buttons>
-                              <Button disable="true" mnemonicParsing="false" text="Add payment" />
-                              <Button defaultButton="true" minWidth="58.0" mnemonicParsing="false" prefHeight="13.0" prefWidth="78.0" text="Add Debt" />
-                              <Button disable="true" mnemonicParsing="false" text="Mark Paid" />
-                           </buttons>
-                        </ButtonBar>
-                     </children></AnchorPane>
-            </content>
-          </Tab>
-            <Tab disable="true" text="Books">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView prefHeight="300.0" prefWidth="600.0">
-                           <columns>
-                              <TableColumn prefWidth="75.0" text="Title" />
-                              <TableColumn prefWidth="75.0" text="Author" />
-                              <TableColumn prefWidth="98.4000244140625" text="ISBN Number" />
-                              <TableColumn prefWidth="98.4000244140625" text="Rentee" />
-                              <TableColumn prefWidth="98.4000244140625" text="Due Date" />
-                           </columns>
-                        </TableView>
-                        <ButtonBar layoutX="134.0" layoutY="303.0" prefHeight="27.0" prefWidth="307.0">
-                           <buttons>
-                              <Button disable="true" mnemonicParsing="false" text="Add payment" />
-                              <Button defaultButton="true" minWidth="58.0" mnemonicParsing="false" prefHeight="13.0" prefWidth="78.0" text="Add Debt" />
-                              <Button disable="true" mnemonicParsing="false" text="Mark Paid" />
-                           </buttons>
-                        </ButtonBar>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-        </tabs>
-      </TabPane>
-   </children>
-</VBox>
+<TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="600.0" text="HOLO Systems" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.holo.gui.MainScreenController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="392.0" prefWidth="598.0">
+         <children>
+            <Button fx:id="devices" layoutX="163.0" layoutY="14.0" mnemonicParsing="false" onAction="#deviceClicked" prefHeight="80.0" prefWidth="249.0" text="Devices" />
+            <Button fx:id="books" disable="true" layoutX="163.0" layoutY="107.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="249.0" text="Books" />
+            <Button fx:id="debts" disable="true" layoutX="163.0" layoutY="199.0" mnemonicParsing="false" onAction="#debtClicked" prefHeight="80.0" prefWidth="249.0" text="Debts" />
+            <Button fx:id="adminButton" disable="true" layoutX="163.0" layoutY="294.0" mnemonicParsing="false" onAction="#adminClicked" prefHeight="80.0" prefWidth="249.0" text="Admin" />
+         </children></AnchorPane>
+  </content>
+</TitledPane>

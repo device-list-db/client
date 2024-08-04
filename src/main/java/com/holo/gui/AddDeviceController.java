@@ -2,6 +2,8 @@ package com.holo.gui;
 
 import java.io.IOException;
 
+import com.holo.utils.Titles;
+
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -35,6 +37,10 @@ public class AddDeviceController {
      */
     public AddDeviceController() {
         editMode = false;
+        deviceSerialDefault = "";
+        deviceMacDefault = "";
+        deviceNameDefault = "";
+        deviceOwner = "";
     }
 
     /**
@@ -53,12 +59,8 @@ public class AddDeviceController {
 
     @FXML
     private void initialize() {
-        try {
         if (deviceSerialDefault.isEmpty() || deviceMacDefault.isEmpty() || deviceNameDefault.isEmpty())
             return;
-        } catch (NullPointerException e) {
-            return;
-        }
         deviceSerial.setText(deviceSerialDefault);
         deviceSerial.setEditable(false);
         deviceMac.setText(deviceMacDefault);
@@ -103,7 +105,7 @@ public class AddDeviceController {
             }
             ClientMain.getNetworkManager().send(command + owner + dSer + dMac + dNam);
             if (ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()).equals(networkComplete)) {
-                    ClientMain.setRoot("MainScreen");
+                    ClientMain.setRoot("MainScreen", Titles.MAINSCREEN.getTitle());
             } else {
                 errorMessage.setTextFill(Color.FIREBRICK);
                 errorMessage.setText("Device enrollment failed");

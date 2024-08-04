@@ -16,7 +16,10 @@ public class VerifyFXML {
     public static void setupWhitelist() {
         validFiles.add("AddDevice");
         validFiles.add("LoginPage");
+        validFiles.add("DevicePage");
         validFiles.add("MainScreen");
+        validFiles.add("DebtPage");
+        validFiles.add("AdminPage");
     }
 
     /**
@@ -25,7 +28,7 @@ public class VerifyFXML {
      * @return if the name of the file is allowed to run
      */
     public static boolean validFXMLFile(String fxml) {
-        if (validFiles.size() != 3) return false;
+        if (validFiles.size() != 6) return false;
         return validFiles.contains(fxml);
     }
 }
