@@ -105,12 +105,11 @@ public class AddDeviceController {
             }
             ClientMain.getNetworkManager().send(command + owner + dSer + dMac + dNam);
             if (ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()).equals(networkComplete)) {
-                    ClientMain.setRoot("MainScreen", Titles.MAINSCREEN.getTitle());
+                    ClientMain.setRoot("DevicePage", Titles.MAINSCREEN.getTitle());
             } else {
                 errorMessage.setTextFill(Color.FIREBRICK);
                 errorMessage.setText("Device enrollment failed");
             }
-            AddDeviceController.thisPopup.hide();
         } catch (IOException e) {
             e.printStackTrace();
         }
