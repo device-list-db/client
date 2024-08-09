@@ -120,13 +120,13 @@ public class AddDeviceController {
     @FXML
     private void onCancel(Event event) {
         event.consume();
-        AddDeviceController.thisPopup.hide();
+        ClientMain.setRoot("DevicePage", Titles.MAINSCREEN.getTitle());
     }
 
     // Go back to the main screen instead of closing the application out
     @FXML
     private void exitApplication(ActionEvent event) {
         event.consume();
-        AddDeviceController.thisPopup.hide();
+        ClientMain.setRoot("DevicePage", Titles.MAINSCREEN.getTitle());
     }
 }
