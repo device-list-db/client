@@ -107,16 +107,18 @@ public class AdminController {
         TextInputDialog tx = new TextInputDialog();
         tx.setHeaderText("Please enter the name of the person: ");
         tx.setTitle("Person Registration");
-        String name = tx.showAndWait().get();
-        try {
-            ClientMain.getNetworkManager().send("ADD-PERSON " + name);
-            if (ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()).equals("ADD-PERSON-OK")) {
-                ClientMain.showInfo("Person added successfully");
-            } else {
-                ClientMain.showError("Person was not able to be added for an unknown reason.");
+        String name = tx.showAndWait().orElse("");
+        if (!name.strip().equals("")) {
+            try {
+                ClientMain.getNetworkManager().send("ADD-PERSON " + name);
+                if (ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()).equals("ADD-PERSON-OK")) {
+                    ClientMain.showInfo("Person added successfully");
+                } else {
+                    ClientMain.showError("Person was not able to be added for an unknown reason.");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }
