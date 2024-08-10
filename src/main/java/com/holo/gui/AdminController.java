@@ -110,7 +110,11 @@ public class AdminController {
         String name = tx.showAndWait().get();
         try {
             ClientMain.getNetworkManager().send("ADD-PERSON " + name);
-            ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve());
+            if (ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()).equals("ADD-PERSON-OK")) {
+                ClientMain.showInfo("Person added successfully");
+            } else {
+                ClientMain.showError("Person was not able to be added for an unknown reason.");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

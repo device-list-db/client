@@ -80,6 +80,8 @@ public class NetworkManager {
             case "DEVICE-NO":
             case "LOG-YES":
             case "DEVICE-UPDATE-YES":
+            case "ADD-PERSON-OK":
+            case "ADD-PERSON-NO":
                 return tmp[0];
         }
         return "NULL";
