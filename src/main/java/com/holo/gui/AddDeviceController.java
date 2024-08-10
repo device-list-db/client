@@ -105,12 +105,11 @@ public class AddDeviceController {
             }
             ClientMain.getNetworkManager().send(command + owner + dSer + dMac + dNam);
             if (ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()).equals(networkComplete)) {
-                    ClientMain.setRoot("MainScreen", Titles.MAINSCREEN.getTitle());
+                    ClientMain.setRoot("DevicePage", Titles.MAINSCREEN.getTitle());
             } else {
                 errorMessage.setTextFill(Color.FIREBRICK);
                 errorMessage.setText("Device enrollment failed");
             }
-            AddDeviceController.thisPopup.hide();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -120,13 +119,13 @@ public class AddDeviceController {
     @FXML
     private void onCancel(Event event) {
         event.consume();
-        AddDeviceController.thisPopup.hide();
+        ClientMain.setRoot("DevicePage", Titles.MAINSCREEN.getTitle());
     }
 
     // Go back to the main screen instead of closing the application out
     @FXML
     private void exitApplication(ActionEvent event) {
         event.consume();
-        AddDeviceController.thisPopup.hide();
+        ClientMain.setRoot("DevicePage", Titles.MAINSCREEN.getTitle());
     }
 }
