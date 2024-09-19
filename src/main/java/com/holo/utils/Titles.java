@@ -1,6 +1,7 @@
 package com.holo.utils;
 
 public enum Titles {
+    PRIMARYSCREEN("HOLO SYSTEM: Main Screen"),
     MAINSCREEN("Devices"),
     ADDDEVICE("Add Device"), 
     DEBT("Debts"),
