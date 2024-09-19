@@ -20,6 +20,8 @@ public class VerifyFXML {
         validFiles.add("MainScreen");
         validFiles.add("DebtPage");
         validFiles.add("AdminPage");
+        validFiles.add("BookPage");
+        validFiles.add("AddBook");
     }
 
     /**
@@ -28,7 +30,7 @@ public class VerifyFXML {
      * @return if the name of the file is allowed to run
      */
     public static boolean validFXMLFile(String fxml) {
-        if (validFiles.size() != 6) return false;
+        if (validFiles.size() != 8) return false;
         return validFiles.contains(fxml);
     }
 }
