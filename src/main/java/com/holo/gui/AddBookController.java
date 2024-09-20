@@ -7,16 +7,17 @@ import com.holo.utils.Titles;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 
 public class AddBookController {
-    @FXML private String authorName;
-    @FXML private String isbn;
-    @FXML private String bookName;
+    @FXML private TextField authorName;
+    @FXML private TextField isbn;
+    @FXML private TextField bookName;
 
     @FXML
     private void onSubmit(Event event) {
         event.consume();
-        String author = authorName.strip();
+        String author = authorName.getText().strip();
         author = author.replaceAll(" ", "_");
         try {
             ClientMain.getNetworkManager().send("GET-AUTHOR-ID " + author);
@@ -27,8 +28,8 @@ public class AddBookController {
                 ClientMain.getNetworkManager().send("GET-AUTHOR-ID " + author);
                 authorId = Integer.parseInt(ClientMain.getNetworkManager().recieve());
             }
-            bookName = bookName.strip();
-            bookName = bookName.replaceAll(" ", "_");
+            String bookNameStr = bookName.getText().strip();
+            bookNameStr = bookNameStr.replaceAll(" ", "_");
             ClientMain.getNetworkManager().send("REGISTER-BOOK " + UUID.randomUUID().toString() + " " + isbn.getText().strip() + " " + authorId + " " + bookNameStr);
             ClientMain.getNetworkManager().recieve();
         } catch (IOException e) {
