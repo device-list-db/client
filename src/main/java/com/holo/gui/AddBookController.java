@@ -1,6 +1,7 @@
 package com.holo.gui;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import com.holo.utils.Titles;
 
@@ -28,7 +29,7 @@ public class AddBookController {
             }
             bookName = bookName.strip();
             bookName = bookName.replaceAll(" ", "_");
-            ClientMain.getNetworkManager().send("REGISTER-BOOK " + isbn.strip() + " " + authorId + " " + bookName);
+            ClientMain.getNetworkManager().send("REGISTER-BOOK " + UUID.randomUUID().toString() + " " + isbn.getText().strip() + " " + authorId + " " + bookNameStr);
             ClientMain.getNetworkManager().recieve();
         } catch (IOException e) {
             ClientMain.showError("Something went wrong");
