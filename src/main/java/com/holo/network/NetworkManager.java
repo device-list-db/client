@@ -64,6 +64,11 @@ public class NetworkManager {
             case "USER-ID":
             case "USER-USERNAME":
             case "USER-NAME":
+            case "BOOK-TOTAL":
+            case "BOOK-TITLE":
+            case "BOOK-AUTHOR":
+            case "BOOK-ISBN":
+            case "BOOK-DUE":
                 return tmp[1];
             case "ERROR":
                 ClientMain.showError(tmp[1]); // Show the server given error, then return ERROR
@@ -82,6 +87,8 @@ public class NetworkManager {
             case "DEVICE-UPDATE-YES":
             case "ADD-PERSON-OK":
             case "ADD-PERSON-NO":
+            case "BOOK-NEXT":
+            case "BOOK-MORE":
                 return tmp[0];
         }
         return "NULL";

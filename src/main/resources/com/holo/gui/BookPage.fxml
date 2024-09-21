@@ -11,13 +11,13 @@
    <children>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
          <children>
-            <TableView prefHeight="300.0" prefWidth="600.0">
+            <TableView fx:id="tableView" prefHeight="300.0" prefWidth="600.0">
                <columns>
-                  <TableColumn prefWidth="75.0" text="Title" />
-                  <TableColumn prefWidth="75.0" text="Author" />
-                  <TableColumn prefWidth="98.4000244140625" text="ISBN Number" />
-                  <TableColumn prefWidth="98.4000244140625" text="Rentee" />
-                  <TableColumn prefWidth="98.4000244140625" text="Due Date" />
+                  <TableColumn fx:id="title" prefWidth="75.0" text="Title" />
+                  <TableColumn fx:id="author" prefWidth="75.0" text="Author" />
+                  <TableColumn fx:id="isbn" prefWidth="98.4000244140625" text="ISBN Number" />
+                  <TableColumn fx:id="rentee" prefWidth="98.4000244140625" text="Rentee" />
+                  <TableColumn fx:id="dueDate" prefWidth="98.4000244140625" text="Due Date" />
                </columns>
             </TableView>
             <ButtonBar layoutX="97.0" layoutY="303.0" prefHeight="27.0" prefWidth="417.0">
