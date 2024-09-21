@@ -26,6 +26,12 @@ public class MainScreenController {
     }
 
     @FXML
+    private void bookClicked(Event event) {
+        event.consume();
+        ClientMain.setRoot("BookPage", Titles.BOOK.getTitle());
+    }
+
+    @FXML
     private void debtClicked(Event event) {
         event.consume();
         ClientMain.setRoot("DebtPage", Titles.DEBT.getTitle());

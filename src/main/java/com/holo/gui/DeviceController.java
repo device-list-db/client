@@ -137,6 +137,6 @@ public class DeviceController implements Initializable {
     @FXML
     private void backPressed(Event event) {
         event.consume();
-        ClientMain.setRoot("MainScreen", "HOLO SYSTEM: Main Screen");
+        ClientMain.setRoot("MainScreen", Titles.PRIMARYSCREEN.getTitle());
     }
 }
