@@ -54,11 +54,12 @@ public class Book {
                 String[] tmp = this.rentee.getName().split("_");
                 String tmp2 = tmp[0] + " " + tmp[1];
                 return tmp2;
+            } else {
+                return this.rentee.getName();
             }
         } catch (NullPointerException e) {
             return "";
         }
-        return "NULL";
     }
 
     public String getDueDate() {
