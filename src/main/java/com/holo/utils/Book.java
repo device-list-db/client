@@ -8,28 +8,36 @@ public class Book {
     private String isbn;
     private Person rentee;
     private LocalDate dueDate;
+    private boolean rented;
+    private String id;
 
 
     public Book() {
+        id = "";
         title = "";
         author = "";
         isbn = "";
         rentee = new Person();
         dueDate = LocalDate.of(1, 1, 1);
+        rented = false;
     }
 
-    public void registerBook(String title, String author, String isbn, Person rentee, LocalDate dueDate) {
+    public void registerBook(String title, String author, String isbn, String id, Person rentee, LocalDate dueDate) {
+        this.id = id;
         this.title = title;
         this.author = author;
         this.isbn = isbn;
         this.rentee = rentee;
         this.dueDate = dueDate;
+        rented = true;
     }
 
-    public void registerBook(String title, String author, String isbn) {
+    public void registerBook(String title, String author, String isbn, String id) {
+        this.id = id;
         this.title = title;
         this.author = author;
         this.isbn = isbn;
+        rented = false;
     }
 
     public String getTitle() { return this.title; }
@@ -39,12 +47,18 @@ public class Book {
     public String getIsbn() { return this.isbn; }
 
     public String getRentee() {
-        if (this.rentee.equals(new Person())) {
+        try {
+            if (this.rentee.equals(new Person())) {
+                return "";
+            } else if (this.rentee.getName().contains("_")) {
+                String[] tmp = this.rentee.getName().split("_");
+                String tmp2 = tmp[0] + " " + tmp[1];
+                return tmp2;
+            } else {
+                return this.rentee.getName();
+            }
+        } catch (NullPointerException e) {
             return "";
-        } else {
-            String[] tmp = this.rentee.getName().split("_");
-            String tmp2 = tmp[0] + " " + tmp[1];
-            return tmp2;
         }
     }
 
@@ -54,6 +68,18 @@ public class Book {
         } else {
             return this.dueDate.toString();
         }
+    }
+
+    public boolean getRented() {
+        return rented;
+    }
+
+    public void setRented(boolean rented) {
+        this.rented = rented;
+    }
+
+    public String getId() {
+        return id;
     }
 
     /**
