@@ -49,7 +49,6 @@ public class LoginController {
             try {
                 ClientMain.getNetworkManager().send("ADMIN-RESPONSE " + user);
                 ClientMain.account.login(user, ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()).equals("YES"));
-                ClientMain.getNetworkManager().send("LOG LOGIN " + user); // Tell the server to log the login
                 ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()); // Remove the server response from the message queue
                 ClientMain.setRoot("MainScreen", "HOLO SYSTEM: Main Screen");
             } catch (IOException e) {
