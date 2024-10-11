@@ -43,6 +43,8 @@ public class AdminController {
             String id = ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve());
             String username = ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve());
             String name = ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve());
+            if (name.contains("_"))
+                name = name.replace("_", " ");
             if (username.length() > 0)
                 tmp.registerPerson(id, name, username);
             else
