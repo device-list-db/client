@@ -18,10 +18,6 @@ import javafx.stage.Popup;
  * @version 0.2.0
  */
 public class AddDeviceController {
-    private static String deviceSerialDefault;
-    private static String deviceMacDefault;
-    private static String deviceNameDefault;
-    private static String deviceOwner;
     /**
      * A Popup controller object
      */
@@ -37,38 +33,11 @@ public class AddDeviceController {
      */
     public AddDeviceController() {
         editMode = false;
-        deviceSerialDefault = "";
-        deviceMacDefault = "";
-        deviceNameDefault = "";
-        deviceOwner = "";
-    }
-
-    /**
-     * Set default variables
-     * @param serial of the device
-     * @param mac of the device
-     * @param name of the device
-     * @param owner Username of the owner of the device
-     */
-    public static void setVariables(String serial, String mac, String name, String owner) {
-        deviceSerialDefault = serial;
-        deviceMacDefault = mac;
-        deviceNameDefault = name;
-        deviceOwner = owner;
     }
 
     @FXML
     private void initialize() {
-        if (deviceSerialDefault.isEmpty() || deviceMacDefault.isEmpty() || deviceNameDefault.isEmpty())
-            return;
-        deviceSerial.setText(deviceSerialDefault);
-        deviceSerial.setEditable(false);
-        deviceMac.setText(deviceMacDefault);
-        deviceName.setText(deviceNameDefault);
-        deviceSerialDefault = null;
-        deviceMacDefault = null;
-        deviceNameDefault = null;
-        editMode = true;
+        editMode = false;
     }
 
     // On press - Attempts to format the user input to be correct to add to the device database
@@ -99,7 +68,6 @@ public class AddDeviceController {
                 command = "REGISTER-DEVICE ";
                 networkComplete = "DEVICE-YES";
             } else {
-                owner = deviceOwner;
                 command = "UPDATE-DEVICE ";
                 networkComplete = "DEVICE-UPDATE-YES";
             }

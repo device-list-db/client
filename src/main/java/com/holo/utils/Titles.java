@@ -7,7 +7,8 @@ public enum Titles {
     DEBT("Debts"),
     ADMIN("Admin"),
     BOOK("Books"),
-    ADDBOOK("Add Book");
+    ADDBOOK("Add Book"),
+    EDITDEVICE("Edit Device");
 
     private String title;
 
