@@ -16,9 +16,10 @@
             <TextField fx:id="authorName" layoutX="183.0" layoutY="22.0" promptText="Author Name" />
             <TextField fx:id="isbn" layoutX="183.0" layoutY="57.0" promptText="ISBN" />
             <TextField fx:id="bookName" layoutX="183.0" layoutY="89.0" promptText="Book Name" />
-            <Button defaultButton="true" layoutX="183.0" layoutY="128.0" mnemonicParsing="false" onAction="#onSubmit" text="Submit" />
-            <Button layoutX="280.0" layoutY="128.0" onAction="#onCancel" text="Cancel" />
+            <Button defaultButton="true" layoutX="129.0" layoutY="128.0" mnemonicParsing="false" onAction="#onSubmit" text="Submit" />
+            <Button layoutX="291.0" layoutY="128.0" onAction="#onCancel" text="Cancel" />
             <Label fx:id="errorMessage" layoutX="47.0" layoutY="132.0" />
+            <Button layoutX="195.0" layoutY="128.0" mnemonicParsing="false" onAction="#onSubmitMore" text="Add Another" />
          </children>
       </AnchorPane>
    </children>

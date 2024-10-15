@@ -48,6 +48,7 @@ public class ClientMain extends Application {
         ClientMain.stage = primaryStage;
         stage.setTitle("Device DB Login Page");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 

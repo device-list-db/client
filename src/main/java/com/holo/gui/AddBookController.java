@@ -14,9 +14,7 @@ public class AddBookController {
     @FXML private TextField isbn;
     @FXML private TextField bookName;
 
-    @FXML
-    private void onSubmit(Event event) {
-        event.consume();
+    private void submit() {
         String author = authorName.getText().strip();
         author = author.replaceAll(" ", "_");
         try {
@@ -31,10 +29,26 @@ public class AddBookController {
             String bookNameStr = bookName.getText().strip();
             bookNameStr = bookNameStr.replaceAll(" ", "_");
             ClientMain.getNetworkManager().send("REGISTER-BOOK " + UUID.randomUUID().toString() + " " + isbn.getText().strip() + " " + authorId + " " + bookNameStr);
-            ClientMain.getNetworkManager().recieve();
+            ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve());
         } catch (IOException e) {
             ClientMain.showError("Something went wrong");
         }
+    }
+
+    @FXML
+    private void onSubmit(Event event) {
+        event.consume();
+        submit();
+        ClientMain.setRoot("BookPage", Titles.BOOK.getTitle());
+    }
+
+    @FXML
+    private void onSubmitMore(Event event) {
+        event.consume();
+        submit();
+        authorName.clear();
+        isbn.clear();
+        bookName.clear();
     }
 
     @FXML
