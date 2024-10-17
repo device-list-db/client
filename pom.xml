@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.holo</groupId>
 	<artifactId>client</artifactId>
-	<version>0.3.0</version>
+	<version>0.4.0</version>
 	<name>HOLO Home Client</name>
 	<!-- FIXME change it to the project's website -->
 	<url>https://github.com/device-list-db/client</url>
