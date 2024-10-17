@@ -124,19 +124,12 @@ public class DeviceController implements Initializable {
     private void handleEditDevice(Event event) {
         event.consume();
         Device device = tableView.getSelectionModel().getSelectedItem();
-        if (!ClientMain.account.isAdmin() && !device.getOwner().equals(ClientMain.account.getUsername())) {
-            ClientMain.showError("Credentials not authorized for this operaion.");
-            return;
-        }
-        Device d = tableView.getSelectionModel().getSelectedItem();
-        AddDeviceController.setVariables(d.getSerialNumber(), d.getMacAddress(), d.getDeviceName(), device.getOwner());
-        AddDeviceController.thisPopup = ClientMain.showPopup("AddDevice").get();
-        AddDeviceController.thisPopup.show(ClientMain.getWindow());
+        ClientMain.showInfo("Tell an administrator you would like to modify the device with the serial " + device.getSerialNumber());
     }
 
     @FXML
     private void backPressed(Event event) {
         event.consume();
-        ClientMain.setRoot("MainScreen", "HOLO SYSTEM: Main Screen");
+        ClientMain.setRoot("MainScreen", Titles.PRIMARYSCREEN.getTitle());
     }
 }

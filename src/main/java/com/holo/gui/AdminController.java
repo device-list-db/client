@@ -43,6 +43,8 @@ public class AdminController {
             String id = ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve());
             String username = ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve());
             String name = ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve());
+            if (name.contains("_"))
+                name = name.replace("_", " ");
             if (username.length() > 0)
                 tmp.registerPerson(id, name, username);
             else
@@ -107,12 +109,18 @@ public class AdminController {
         TextInputDialog tx = new TextInputDialog();
         tx.setHeaderText("Please enter the name of the person: ");
         tx.setTitle("Person Registration");
-        String name = tx.showAndWait().get();
-        try {
-            ClientMain.getNetworkManager().send("ADD-PERSON " + name);
-            ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve());
-        } catch (IOException e) {
-            e.printStackTrace();
+        String name = tx.showAndWait().orElse("");
+        if (!name.strip().equals("")) {
+            try {
+                ClientMain.getNetworkManager().send("ADD-PERSON " + name);
+                if (ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()).equals("ADD-PERSON-OK")) {
+                    ClientMain.showInfo("Person added successfully");
+                } else {
+                    ClientMain.showError("Person was not able to be added for an unknown reason.");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
