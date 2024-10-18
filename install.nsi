@@ -12,7 +12,7 @@ InstallDir $DESKTOP
 # default section start; every NSIS script has at least one section.
 Section
     SetOutPath $INSTDIR
-    File target\client-1.0.jar
+    File target\client-4.0.jar
     File .env
     MessageBox MB_OK "This application requires java 19 to be installed."
 # default section end
