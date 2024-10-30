@@ -11,13 +11,12 @@
    <children>
   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
          <children>
-            <TableView prefHeight="180.0" prefWidth="600.0">
+            <TableView fx:id="tableView" prefHeight="180.0" prefWidth="600.0">
                <columns>
-                  <TableColumn prefWidth="75.0" text="Debtor" />
-                  <TableColumn prefWidth="75.0" text="Debtee" />
-                  <TableColumn prefWidth="98.4000244140625" text="Amount owed" />
-                  <TableColumn prefWidth="98.4000244140625" text="Amount paid" />
-                  <TableColumn prefWidth="98.4000244140625" text="Due Date" />
+                  <TableColumn fx:id="debtor" prefWidth="106.0" text="Debtor" />
+                  <TableColumn fx:id="debtee" prefWidth="100.0" text="Debtee" />
+                  <TableColumn fx:id="amountOwed" prefWidth="98.0" text="Amount owed" />
+                  <TableColumn fx:id="amountPaid" prefWidth="88.0" text="Amount paid" />
                </columns>
             </TableView>
          </children>

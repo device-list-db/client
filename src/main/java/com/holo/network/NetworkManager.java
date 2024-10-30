@@ -71,6 +71,9 @@ public class NetworkManager {
             case "BOOK-DUE":
             case "PERSON-ID":
             case "BOOK-ID":
+            case "DEBT-TOTAL":
+            case "DEBT-TOTAL-AMOUNT":
+            case "DEBT-AMOUNT-PAID":
                 return tmp[1];
             case "ERROR":
                 ClientMain.showError(tmp[1]); // Show the server given error, then return ERROR
@@ -94,6 +97,8 @@ public class NetworkManager {
             case "RENT-BOOK-SUCCESS":
             case "UNRENT-BOOK-SUCCESS":
             case "UNRENT-BOOK-FAILURE":
+            case "DEBT-SUCCESS":
+            case "DEBT-FAILURE":
                 return tmp[0];
         }
         return "NULL";

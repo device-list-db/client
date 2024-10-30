@@ -48,7 +48,12 @@ public class LoginController {
         if (Encryption.verifyPassword(pass, storedPass)) {
             try {
                 ClientMain.getNetworkManager().send("ADMIN-RESPONSE " + user);
-                ClientMain.account.login(user, ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()).equals("YES"));
+                boolean isAdmin = ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()).equals("YES");
+                ClientMain.getNetworkManager().send("GET-USER-ID " + user);
+                int userId = Integer.parseInt(ClientMain.getNetworkManager().recieve());
+                ClientMain.getNetworkManager().send("GET-USER-NAME " + user);
+                String userName = ClientMain.getNetworkManager().recieve();
+                ClientMain.account.login(user, isAdmin, userId, userName);
                 ClientMain.setRoot("MainScreen", "HOLO SYSTEM: Main Screen");
             } catch (IOException e) {
                 ClientMain.logger.logError(e);
