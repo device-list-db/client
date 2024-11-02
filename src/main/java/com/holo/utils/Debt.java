@@ -44,6 +44,8 @@ public class Debt {
     }
 
     public String getMemo() {
+        if (memo.contains("_"))
+            return memo.replace("_", " ");
         return memo;
     }
 
