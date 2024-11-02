@@ -13,10 +13,11 @@
          <children>
             <TableView fx:id="tableView" prefHeight="180.0" prefWidth="600.0">
                <columns>
-                  <TableColumn fx:id="debtor" prefWidth="106.0" text="Debtor" />
-                  <TableColumn fx:id="debtee" prefWidth="100.0" text="Debtee" />
-                  <TableColumn fx:id="amountOwed" prefWidth="98.0" text="Amount owed" />
-                  <TableColumn fx:id="amountPaid" prefWidth="88.0" text="Amount paid" />
+                  <TableColumn fx:id="debtor" editable="false" prefWidth="106.0" text="Debtor" />
+                  <TableColumn fx:id="debtee" editable="false" prefWidth="100.0" text="Debtee" />
+                  <TableColumn fx:id="amountOwed" editable="false" prefWidth="98.0" text="Amount owed" />
+                  <TableColumn fx:id="amountPaid" editable="false" prefWidth="88.0" text="Amount paid" />
+                  <TableColumn fx:id="memo" editable="false" prefWidth="88.0" text="Memo" />
                </columns>
             </TableView>
          </children>

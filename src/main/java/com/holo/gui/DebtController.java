@@ -22,6 +22,7 @@ public class DebtController implements Initializable {
     @FXML private TableColumn<Debt, String> debtee;
     @FXML private TableColumn<Debt, String> amountOwed;
     @FXML private TableColumn<Debt, String> amountPaid;
+    @FXML private TableColumn<Debt, String> memo;
 
     @Override
     public void initialize(URL Location, ResourceBundle resources) {
@@ -29,6 +30,7 @@ public class DebtController implements Initializable {
         debtee.setCellValueFactory(new PropertyValueFactory<Debt, String>("debtee"));
         amountOwed.setCellValueFactory(new PropertyValueFactory<Debt, String>("amountOwed"));
         amountPaid.setCellValueFactory(new PropertyValueFactory<Debt, String>("amountPaid"));
+        memo.setCellValueFactory(new PropertyValueFactory<Debt, String>("memo"));
 
         try {
             tableView.getItems().setAll(setValues());
@@ -51,7 +53,8 @@ public class DebtController implements Initializable {
             tmp.registerPerson(ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()), ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()));
             double totalAmount = Double.parseDouble(ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()));
             double amountPaid = Double.parseDouble(ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve()));
-            debt.registerDebt(tmp, you, totalAmount, amountPaid);
+            String memo = ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve());
+            debt.registerDebt(tmp, you, totalAmount, amountPaid, memo);
             al.add(debt);
         }
         ClientMain.getNetworkManager().parseServerMessage(ClientMain.getNetworkManager().recieve());

@@ -74,6 +74,7 @@ public class NetworkManager {
             case "DEBT-TOTAL":
             case "DEBT-TOTAL-AMOUNT":
             case "DEBT-AMOUNT-PAID":
+            case "DEBT-MEMO":
                 return tmp[1];
             case "ERROR":
                 ClientMain.showError(tmp[1]); // Show the server given error, then return ERROR
